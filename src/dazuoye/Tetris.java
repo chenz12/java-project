@@ -8,17 +8,17 @@ import java.util.Random;
 import javax.swing.*;
 
 public class Tetris extends JFrame{
-	public final static int MAXCOLOR=210;
-	public final static int MINCOLOR=20;
-	public final static int MIDCOLOR=60;
+	public final static int MAXCOLOR=230;
+	public final static int MINCOLOR=90;
+	public final static int MIDCOLOR=160;
 	private SidePanel side;
 	private MainPanel main;
 	private int level;
 	private int score;
 	Add pile;
 	public timer t;
-	static Types currenttype;
-	static Types nexttype;
+	Types currenttype;
+	Types nexttype;
 	
 	
 	Tetris(){
@@ -37,12 +37,13 @@ public class Tetris extends JFrame{
 			public void keyPressed(KeyEvent e){
 				switch(e.getKeyCode()){
 				case KeyEvent.VK_A:
-					
+					moveleft(currenttype);
 				}
 			}
 		});
 		
 		nexttype = Tetris.RandomType();
+		currenttype = nexttype;
 	}
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -71,6 +72,38 @@ public class Tetris extends JFrame{
 			return Types.TypeI();
 		}
 		
+	}
+	public int[] bound(Types a){
+		int[] res =  new int[4];
+		int[][] matrix = Types.converse(a);
+		for(int i=0;i<4;i++){
+			for(int j=0;j<4;j++){
+				if(matrix[i][j]==1&&res[0]==0){
+					res[0]=i;
+				}
+				if(matrix[i][j]==1){
+					res[1]=i;
+				}
+				if(matrix[i][j]==1&&res[2]==0){
+					res[2]=j;
+				}
+				if(matrix[i][j]==1){
+					res[3]=j;
+				}
+			}
+		}
+		return res;
+	}
+	
+	public void moveleft(Types a){
+		if(a.col>0&&pile.leftmoveable(a)){
+		a.col--;
+		}
+	}
+	public void moveright(Types a){
+		if(a.col<9&&pile.rightmoveable(a)){
+			a.col++;
+		}
 	}
 	
 }

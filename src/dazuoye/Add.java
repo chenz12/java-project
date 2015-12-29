@@ -44,5 +44,17 @@ public class Add {
 		return true;
 	}
 	
+	boolean leftmoveable(Types a){
+		if(a.row>0){
+		return place(a, a.col, a.row-1);}
+		return false;
+	}
+	boolean rightmoveable(Types a){
+		if(a.row<9){
+		return place(a, a.col, a.row+1);
+		}
+		return false;
+	}
+	
 	
 }

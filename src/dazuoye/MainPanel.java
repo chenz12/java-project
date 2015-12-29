@@ -33,6 +33,23 @@ public class MainPanel extends JPanel{
 			}
 		}
 		
+		painttype(g);
+		
+	}
+	
+	void painttype(Graphics g){
+		int[][] position = Types.converse(te.currenttype);
+		g.setColor(te.currenttype.color);
+		for(int i=0;i<4;i++){
+			for(int j=0;j<4;j++){
+				if(position[i][j]==1){
+					g.setColor(te.currenttype.color);
+					g.fillRect(5+te.currenttype.row*24+24*j, 10+te.currenttype.col*24+24*i, 24, 24);
+					g.setColor(Color.BLACK);
+					g.drawRect(5+te.currenttype.row*24+24*j, 10+te.currenttype.col*24+24*i, 24, 24);
+				}
+			}
+		}
 	}
 	
 }

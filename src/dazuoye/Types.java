@@ -26,7 +26,7 @@ public class Types {
 		this.color = new Color(max, mid, min);
 		currentrotation = 0;
 		col=0;
-		row=0;
+		row=4;
 	}
 	
 	public static Types TypeI(){
@@ -54,7 +54,7 @@ public class Types {
 	}
 	
 	public static Types TypeL(){
-		Types L = new Types(Tetris.MINCOLOR, Tetris.MINCOLOR, Tetris.MINCOLOR);
+		Types L = new Types(Tetris.MINCOLOR, Tetris.MAXCOLOR, Tetris.MINCOLOR);
 		L.matrix = pattern[4];
 		return L;
 	}
@@ -66,7 +66,7 @@ public class Types {
 	}
 	
 	public static Types TypeO(){
-		Types O = new Types(Tetris.MINCOLOR, Tetris.MINCOLOR, Tetris.MIDCOLOR);
+		Types O = new Types(Tetris.MIDCOLOR, Tetris.MAXCOLOR, Tetris.MIDCOLOR);
 		O.matrix = pattern[6];
 		return O;
 	}
@@ -76,7 +76,7 @@ public class Types {
 	
 	public static int[][] converse(Types a){
 		int i = a.matrix[a.currentrotation];
-		System.out.println(Integer.toHexString(i));
+		//System.out.println(Integer.toHexString(i));
 		int[][] result = new int[4][4];
 		for(int j=0;j<4;j++){
 			for(int k=0;k<4;k++){
@@ -86,36 +86,4 @@ public class Types {
 		return result;
 	}
 	
-	public int[] bound(Types a){
-		int[] res =  new int[4];
-		int[][] matrix = Types.converse(a);
-		for(int i=0;i<4;i++){
-			for(int j=0;j<4;j++){
-				if(matrix[i][j]==1&&res[0]==0){
-					res[0]=i;
-				}
-				if(matrix[i][j]==1){
-					res[1]=i;
-				}
-				if(matrix[i][j]==1&&res[2]==0){
-					res[2]=j;
-				}
-				if(matrix[i][j]==1){
-					res[3]=j;
-				}
-			}
-		}
-		return res;
-	}
-	
-	public void moveleft(Types a){
-		if(a.col>0){
-		a.col--;
-		}
-	}
-	public void moveright(Types a){
-		if(a.col<9){
-			a.col++;
-		}
-	}
 }

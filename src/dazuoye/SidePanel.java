@@ -53,12 +53,12 @@ public class SidePanel extends JPanel{
 		drawtile(g);
 	}
 	public void drawtile(Graphics g){
-		Types next = Tetris.nexttype;
-		g.setColor(next.color);
-		int[][] position = Types.converse(next);
+		
+		int[][] position = Types.converse(te.nexttype);
+		g.setColor(te.nexttype.color);
 		for(int i=0;i<4;i++){
 			for(int j=0;j<4;j++){
-				g.setColor(next.color);
+				g.setColor(te.nexttype.color);
 				if(position[i][j]==1){
 					g.fillRect(90+12*j, 47+12*i, 12, 12);
 					g.setColor(Color.BLACK);
