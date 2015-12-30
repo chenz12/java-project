@@ -66,7 +66,11 @@ public class Tetris extends JFrame{
 	
 	void startgame(){
 		while(true){
+			
 			cycle();
+			
+			score += pile.update() << 2;
+			
 			try {
 				Thread.sleep(10);
 			} catch (InterruptedException e) {
