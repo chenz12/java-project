@@ -43,7 +43,9 @@ public class SidePanel extends JPanel{
 		g.drawString("P -pause the game", inset2, a+=interval);
 		g.drawString("+ -add the speed",inset2, a+=interval);
 		g.drawString("- -reduce the speed", inset2, a+=interval);
-		
+		g.drawString("B -begin a new game", inset2, a+=interval);
+		g.drawString("R -recover the game", inset2, a+=interval);
+		g.drawString("ese -exit the game", inset2, a+=interval);
 		g.drawRect(center_x-30, center_y-30, sq_lenth, sq_lenth);
 		
 		drawtile(g);

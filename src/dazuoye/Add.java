@@ -38,13 +38,11 @@ public class Add {
 		
 		return false;
 	}
-	boolean contains(){
-		for(int i=0;i<20;i++){
+	boolean contains(int i){
 			for(int j=0;j<10;j++){
 				if(main[i][j]!=null){
 					return true;
 				}
-			}
 		}
 		return false;
 	}
@@ -128,6 +126,13 @@ public class Add {
 		return false;
 	}
 	
-	
+	int getheight(){
+		for(int i=0;i<20;i++){
+			if(contains(i)){
+				return i;
+			}
+		}
+		return 19;
+	}
 }
 

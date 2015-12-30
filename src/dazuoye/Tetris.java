@@ -21,6 +21,8 @@ public class Tetris extends JFrame{
 	public timer t;
 	Types currenttype;
 	Types nexttype;
+	boolean ispaused;
+	boolean over;
 	
 	
 	Tetris(){
@@ -103,7 +105,27 @@ public class Tetris extends JFrame{
 					level--;
 					}
 					break;
+				case KeyEvent.VK_B:
+					
+					if(over){over = false;}
+					newgame();
+					
+					break;
+				case KeyEvent.VK_P:
+					pause();
+					break;
+				case KeyEvent.VK_ESCAPE:
+					System.exit(0);
+					break;
 				}
+			}
+			private void pause() {
+				if(!ispaused)// TODO Auto-generated method stub
+				{
+					ispaused = true;
+				}
+				else ispaused = false;
+				
 			}
 			public void keyReleased(KeyEvent e){
 				if(e.getKeyCode()==KeyEvent.VK_DOWN){
@@ -121,15 +143,28 @@ public class Tetris extends JFrame{
 		Tetris game = new Tetris();
 		game.startgame();
 	}
+	void newgame(){
+		this.level = 1;
+		this.score =0;
+		main.clean();
+		t.reset();
+		over = false;
+		currenttype =Tetris.RandomType();
+		//startgame();
+		main.repaint();
+		side.repaint();
+	}
 	
 	void startgame(){
 		while(true){
+		while(!over){
 			
 			cycle();
 			if(pile.update()!=0)
 			{
 				score += 10 << pile.update();
 			}
+			isover();
 			
 			try {
 				Thread.sleep(10);
@@ -141,9 +176,16 @@ public class Tetris extends JFrame{
 			side.repaint();
 		}
 	}
+	}
 	
+	void isover() {
+		// TODO Auto-generated method stub
+		if(pile.getheight()<=4-currenttype.upindex[currenttype.currentrotation]-currenttype.lowindex[currenttype.currentrotation]){
+			over = true;
+		}
+	}
 	void cycle(){
-		if(t.iscycled()){
+		if(t.iscycled()&&!ispaused){
 			if(nextable()){
 			currenttype.col++;
 			}

@@ -19,8 +19,8 @@ public class timer {
 	public void pause(){
 		start = System.nanoTime();
 	}
-	public void reset(int a){
-		pause();
-		speed = a;
+	public void reset(){
+		speed = 1;
+		start = System.nanoTime();
 	}
 }

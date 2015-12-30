@@ -25,6 +25,11 @@ public class MainPanel extends JPanel{
 		super.paintComponent(g);
 		g.setColor(new Color(5,175,5));
 		g.setFont(small);
+		if(te.over){
+			String msg = "GAME OVER";
+			g.drawString(msg, 60 - g.getFontMetrics().stringWidth(msg) / 2, 400);
+		}
+		else{
 		for(int i=0;i<11;i++){
 			for(int j=0;j<21;j++){
 				g.drawLine(5, 10+j*24, 245, 10+j*24);
@@ -48,7 +53,7 @@ public class MainPanel extends JPanel{
 		painttype(g);
 		
 	}
-	
+	}
 	/*void paintadd(Graphics g){
 		for(int i=0;i<20;i++){
 			for(int j=0;j<10;j++){
@@ -66,6 +71,7 @@ public class MainPanel extends JPanel{
 	void painttype(Graphics g){
 		int[][] position = Types.converse(te.currenttype);
 		g.setColor(te.currenttype.color);
+		
 		for(int i=0;i<4;i++){
 			for(int j=0;j<4;j++){
 				if(position[i][j]==1){
@@ -78,6 +84,16 @@ public class MainPanel extends JPanel{
 				}
 			}
 		}
+		
+	}
+	public void clean() {
+		// TODO Auto-generated method stub
+		for(int i=0;i<20;i++){
+			for(int j=0;j<10;j++){
+				te.pile.main[i][j] = null;
+			}
+		}
+		
 	}
 	
 }
