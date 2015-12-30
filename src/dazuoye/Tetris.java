@@ -56,7 +56,7 @@ public class Tetris extends JFrame{
 		});
 		t = new timer(1);
 		nexttype = Tetris.RandomType();
-		currenttype = nexttype;
+		currenttype = Tetris.RandomType();
 	}
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -66,9 +66,7 @@ public class Tetris extends JFrame{
 	
 	void startgame(){
 		while(true){
-			if(t.iscycled()){
-				currenttype.col++;
-			}
+			cycle();
 			try {
 				Thread.sleep(10);
 			} catch (InterruptedException e) {
@@ -79,6 +77,25 @@ public class Tetris extends JFrame{
 			side.repaint();
 		}
 	}
+	
+	void cycle(){
+		if(t.iscycled()){
+			if(nextable()){
+			currenttype.col++;
+			}
+			else{
+				pile.addtype(currenttype, currenttype.col, currenttype.row);
+				currenttype = nexttype;
+				nexttype = Tetris.RandomType();
+			}
+		}
+		
+	}
+	
+	boolean nextable(){
+		return pile.place(currenttype, currenttype.col+1, currenttype.row);
+	}
+	
 	
 	public static Types RandomType(){
 		int n = new Random().nextInt(7);
@@ -126,12 +143,12 @@ public class Tetris extends JFrame{
 	}
 	
 	public void moveleft(Types a){
-		if(a.row>0&&pile.leftmoveable(a)){
+		if(a.row>=0&&pile.leftmoveable(a)){
 		a.row--;
 		}
 	}
 	public void moveright(Types a){
-		if(a.row<9&&pile.rightmoveable(a)){
+		if(a.row<=9&&pile.rightmoveable(a)){
 			a.row++;
 		}
 	}

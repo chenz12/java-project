@@ -32,10 +32,36 @@ public class MainPanel extends JPanel{
 				
 			}
 		}
+		//paintadd(g);
+		
+		for(int i=0;i<20;i++){
+			for(int j=0;j<10;j++){
+				if(te.pile.main[i][j]!=null){
+				g.setColor(te.pile.main[i][j].color);
+				g.fillRect(5+j*24, 10+i*24, 24, 24);
+				g.setColor(Color.BLACK);
+				g.drawRect(5+24*j, 10+24*i, 24, 24);
+				}
+			}
+		}
 		
 		painttype(g);
 		
 	}
+	
+	/*void paintadd(Graphics g){
+		for(int i=0;i<20;i++){
+			for(int j=0;j<10;j++){
+				if(te.pile.main[i][j]!=null){
+				System.out.println("ok");
+				g.setColor(te.pile.main[i][j].color);
+				g.fillRect(5+j*24, 10+i*24, 24, 24);
+				g.setColor(Color.BLACK);
+				g.drawRect(5+24*j, 10+24*i, 24, 24);
+				}
+			}
+		}
+	}*/
 	
 	void painttype(Graphics g){
 		int[][] position = Types.converse(te.currenttype);
