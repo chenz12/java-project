@@ -43,9 +43,32 @@ public class Tetris extends JFrame{
 				case KeyEvent.VK_S:
 					t.speed = 10;break;
 				case KeyEvent.VK_Q:
-					currenttype.currentrotation = (currenttype.currentrotation+1)%4;break;
+					if(currenttype.row+currenttype.leftindex[currenttype.currentrotation]==0){
+						currenttype.row++;
+					currenttype.currentrotation = (currenttype.currentrotation+1)%4;
+					moveleft(currenttype);}
+					else if(currenttype.row+3-currenttype.rightindex[currenttype.currentrotation]==9){
+						currenttype.row--;
+						currenttype.currentrotation = (currenttype.currentrotation+3)%4;
+						moveright(currenttype);
+					}
+					else
+						currenttype.currentrotation = (currenttype.currentrotation+1)%4;
+					break;
 				case KeyEvent.VK_E:
-					currenttype.currentrotation = (currenttype.currentrotation+3)%4;break;
+					if(currenttype.row+3-currenttype.rightindex[currenttype.currentrotation]==9){
+						currenttype.row--;
+						currenttype.currentrotation = (currenttype.currentrotation+3)%4;
+						moveright(currenttype);
+					}
+					else if(currenttype.row+currenttype.leftindex[currenttype.currentrotation]==0){
+						currenttype.row++;
+					currenttype.currentrotation = (currenttype.currentrotation+1)%4;
+					moveleft(currenttype);}
+					else 
+					currenttype.currentrotation = (currenttype.currentrotation+3)%4;
+					
+					break;
 				}
 			}
 			public void keyReleased(KeyEvent e){
