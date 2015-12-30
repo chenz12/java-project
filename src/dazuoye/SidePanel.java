@@ -32,19 +32,15 @@ public class SidePanel extends JPanel{
 		super.paintComponent(g);
 		g.setColor(color);
 		g.setFont(large);
-		g.drawString("Level:", inset1, 175);
-		g.drawString("Score:", inset1, 175+interval);
+		g.drawString("Level:"+te.level, inset1, 175);
+		g.drawString("Score:"+te.score, inset1, 175+interval);
 		g.drawString("Next Tile:", inset1, 70);
 		g.drawString("Controls:", inset1, 280);
 		
-		int a;
+		int a = 280+interval;
 		g.setFont(small);
-		g.drawString("A -moving left", inset2, a=280+interval);
-		g.drawString("S -moving faster down", inset2,a+=interval);
-		g.drawString("D -moving right", inset2, a+=interval);
-		g.drawString("Q -rotation", inset2, a+=interval);
-		g.drawString("E -rotation", inset2, a+=interval);
-		g.drawString("R -pause the game", inset2, a+=interval);
+
+		g.drawString("P -pause the game", inset2, a+=interval);
 		g.drawString("+ -add the speed",inset2, a+=interval);
 		g.drawString("- -reduce the speed", inset2, a+=interval);
 		

@@ -13,9 +13,11 @@ public class Tetris extends JFrame{
 	public final static int MIDCOLOR=160;
 	private SidePanel side;
 	private MainPanel main;
-	private int level;
-	private int score;
+	int level;
+	int score;
 	Add pile;
+	double maxspeed = 10.0;
+	double tempspeed = 0.0;
 	public timer t;
 	Types currenttype;
 	Types nexttype;
@@ -23,6 +25,8 @@ public class Tetris extends JFrame{
 	
 	Tetris(){
 		super("Tetris");
+		level =1;
+		score =0;
 		this.setVisible(true);
 		this.setResizable(false);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -41,9 +45,27 @@ public class Tetris extends JFrame{
 				case KeyEvent.VK_RIGHT:
 					moveright(currenttype);break;
 				case KeyEvent.VK_DOWN:
-					t.speed = 10;break;
+					tempspeed = t.speed;
+					t.speed = maxspeed;break;
 				case KeyEvent.VK_SPACE:
-					if(currenttype.row+currenttype.leftindex[currenttype.currentrotation]==0){
+					if(currenttype.istypeI()){
+						if(currenttype.row+currenttype.leftindex[currenttype.currentrotation]==0){
+							currenttype.row +=2;
+						currenttype.currentrotation = (currenttype.currentrotation+1)%4;
+						moveleft(currenttype);
+						moveleft(currenttype);
+						}
+						else if(currenttype.row+3-currenttype.rightindex[currenttype.currentrotation]==9){
+							currenttype.row -=2;
+							currenttype.currentrotation = (currenttype.currentrotation+1)%4;
+							moveright(currenttype);
+							moveright(currenttype);
+						}
+						else
+							currenttype.currentrotation = (currenttype.currentrotation+1)%4;
+					}
+					
+					else if(currenttype.row+currenttype.leftindex[currenttype.currentrotation]==0){
 						currenttype.row++;
 					currenttype.currentrotation = (currenttype.currentrotation+1)%4;
 					moveleft(currenttype);}
@@ -70,16 +92,22 @@ public class Tetris extends JFrame{
 					
 					break;*/
 				case KeyEvent.VK_ADD:
+					if(level<10){
 					t.speed = t.speed*1.7;
+					level++;
+					}
 					break;
 				case KeyEvent.VK_SUBTRACT:
+					if(level>1){
 					t.speed = t.speed/1.7;
+					level--;
+					}
 					break;
 				}
 			}
 			public void keyReleased(KeyEvent e){
 				if(e.getKeyCode()==KeyEvent.VK_DOWN){
-					t.speed = 1;
+					t.speed = Math.pow(1.7, level);
 				}
 			}
 			
@@ -98,8 +126,10 @@ public class Tetris extends JFrame{
 		while(true){
 			
 			cycle();
-			
-			score += pile.update() << 2;
+			if(pile.update()!=0)
+			{
+				score += 10 << pile.update();
+			}
 			
 			try {
 				Thread.sleep(10);

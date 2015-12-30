@@ -128,7 +128,10 @@ public class Types {
 	}
 	
 	
-
+	boolean istypeI(){
+		Types b = TypeI();
+		return this.matrix.equals(b.matrix);
+	}
 	
 	public static int[][] converse(Types a){
 		int i = a.matrix[a.currentrotation];
