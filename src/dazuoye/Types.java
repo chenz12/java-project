@@ -32,42 +32,49 @@ public class Types {
 	public static Types TypeI(){
 		Types I = new Types(Tetris.MAXCOLOR, Tetris.MIDCOLOR, Tetris.MINCOLOR);
 		I.matrix = pattern[0];
+		I.col = -1;
 		return I;
 	}
 	
 	public static Types TypeT(){
 		Types T = new Types(Tetris.MIDCOLOR, Tetris.MINCOLOR, Tetris.MAXCOLOR);
 		T.matrix = pattern[1];
+		T.col = -2;
 		return T;
 	}
 	
 	public static Types TypeS(){
 		Types S = new Types(Tetris.MAXCOLOR, Tetris.MINCOLOR, Tetris.MIDCOLOR);
 		S.matrix = pattern[2];
+		S.col = -2;
 		return S;
 	}
 	
 	public static Types TypeZ(){
 		Types Z = new Types(Tetris.MIDCOLOR, Tetris.MAXCOLOR,Tetris.MINCOLOR);
 		Z.matrix = pattern[3];
+		Z.col = -2;
 		return Z;
 	}
 	
 	public static Types TypeL(){
 		Types L = new Types(Tetris.MINCOLOR, Tetris.MAXCOLOR, Tetris.MINCOLOR);
 		L.matrix = pattern[4];
+		L.col = -2;
 		return L;
 	}
 	
 	public static Types TypeJ(){
 		Types J = new Types(Tetris.MINCOLOR, Tetris.MIDCOLOR, Tetris.MAXCOLOR);
 		J.matrix = pattern[5];
+		J.col = -2;
 		return J;
 	}
 	
 	public static Types TypeO(){
 		Types O = new Types(Tetris.MIDCOLOR, Tetris.MAXCOLOR, Tetris.MIDCOLOR);
 		O.matrix = pattern[6];
+		O.col = -2;
 		return O;
 	}
 	

@@ -32,22 +32,52 @@ public class Tetris extends JFrame{
 		add(side,BorderLayout.EAST);
 		add(main,BorderLayout.CENTER);
 		pack();
-		
+		pile = new Add();
 		addKeyListener(new KeyAdapter(){
 			public void keyPressed(KeyEvent e){
 				switch(e.getKeyCode()){
 				case KeyEvent.VK_A:
-					moveleft(currenttype);
+					moveleft(currenttype);break;
+				case KeyEvent.VK_D:
+					moveright(currenttype);break;
+				case KeyEvent.VK_S:
+					t.speed = 10;break;
+				case KeyEvent.VK_Q:
+					currenttype.currentrotation = (currenttype.currentrotation+1)%4;break;
+				case KeyEvent.VK_E:
+					currenttype.currentrotation = (currenttype.currentrotation+3)%4;break;
+				}
+			}
+			public void keyReleased(KeyEvent e){
+				if(e.getKeyCode()==KeyEvent.VK_S){
+					t.speed = 1;
 				}
 			}
 		});
-		
+		t = new timer(1);
 		nexttype = Tetris.RandomType();
 		currenttype = nexttype;
 	}
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		new Tetris();
+		Tetris game = new Tetris();
+		game.startgame();
+	}
+	
+	void startgame(){
+		while(true){
+			if(t.iscycled()){
+				currenttype.col++;
+			}
+			try {
+				Thread.sleep(10);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			main.repaint();
+			side.repaint();
+		}
 	}
 	
 	public static Types RandomType(){
@@ -96,13 +126,13 @@ public class Tetris extends JFrame{
 	}
 	
 	public void moveleft(Types a){
-		if(a.col>0&&pile.leftmoveable(a)){
-		a.col--;
+		if(a.row>0&&pile.leftmoveable(a)){
+		a.row--;
 		}
 	}
 	public void moveright(Types a){
-		if(a.col<9&&pile.rightmoveable(a)){
-			a.col++;
+		if(a.row<9&&pile.rightmoveable(a)){
+			a.row++;
 		}
 	}
 	

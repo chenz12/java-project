@@ -4,7 +4,9 @@ public class Add {
 	int[] bound;
 	int[][] main;
 	
-	Add(){}
+	Add(){
+		main = new int[20][10];
+	}
 	
 	int checklines(){
 		int res=0;
