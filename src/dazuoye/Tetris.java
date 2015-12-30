@@ -36,26 +36,26 @@ public class Tetris extends JFrame{
 		addKeyListener(new KeyAdapter(){
 			public void keyPressed(KeyEvent e){
 				switch(e.getKeyCode()){
-				case KeyEvent.VK_A:
+				case KeyEvent.VK_LEFT:
 					moveleft(currenttype);break;
-				case KeyEvent.VK_D:
+				case KeyEvent.VK_RIGHT:
 					moveright(currenttype);break;
-				case KeyEvent.VK_S:
+				case KeyEvent.VK_DOWN:
 					t.speed = 10;break;
-				case KeyEvent.VK_Q:
+				case KeyEvent.VK_SPACE:
 					if(currenttype.row+currenttype.leftindex[currenttype.currentrotation]==0){
 						currenttype.row++;
 					currenttype.currentrotation = (currenttype.currentrotation+1)%4;
 					moveleft(currenttype);}
 					else if(currenttype.row+3-currenttype.rightindex[currenttype.currentrotation]==9){
 						currenttype.row--;
-						currenttype.currentrotation = (currenttype.currentrotation+3)%4;
+						currenttype.currentrotation = (currenttype.currentrotation+1)%4;
 						moveright(currenttype);
 					}
 					else
 						currenttype.currentrotation = (currenttype.currentrotation+1)%4;
 					break;
-				case KeyEvent.VK_E:
+				/*case KeyEvent.VK_E:
 					if(currenttype.row+3-currenttype.rightindex[currenttype.currentrotation]==9){
 						currenttype.row--;
 						currenttype.currentrotation = (currenttype.currentrotation+3)%4;
@@ -68,14 +68,21 @@ public class Tetris extends JFrame{
 					else 
 					currenttype.currentrotation = (currenttype.currentrotation+3)%4;
 					
+					break;*/
+				case KeyEvent.VK_ADD:
+					t.speed = t.speed*1.7;
+					break;
+				case KeyEvent.VK_SUBTRACT:
+					t.speed = t.speed/1.7;
 					break;
 				}
 			}
 			public void keyReleased(KeyEvent e){
-				if(e.getKeyCode()==KeyEvent.VK_S){
+				if(e.getKeyCode()==KeyEvent.VK_DOWN){
 					t.speed = 1;
 				}
 			}
+			
 		});
 		t = new timer(1);
 		nexttype = Tetris.RandomType();
