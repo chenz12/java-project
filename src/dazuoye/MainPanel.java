@@ -75,7 +75,7 @@ public class MainPanel extends JPanel{
 		for(int i=0;i<4;i++){
 			for(int j=0;j<4;j++){
 				if(position[i][j]==1){
-					if((i+te.currenttype.col)>=0&&(j+te.currenttype.row)>=0&&(i+te.currenttype.col)<20){
+					if((i+te.currenttype.col)>=0&&(i+te.currenttype.col)<20){
 					g.setColor(te.currenttype.color);
 					g.fillRect(5+te.currenttype.row*24+24*j, 10+te.currenttype.col*24+24*i, 24, 24);
 					g.setColor(Color.BLACK);

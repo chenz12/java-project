@@ -257,12 +257,12 @@ public class Tetris extends JFrame{
 	}
 	
 	public void moveleft(Types a){
-		if(a.row>=0&&pile.leftmoveable(a)){
+		if(a.row+a.leftindex[a.currentrotation]>=0&&pile.leftmoveable(a)){
 		a.row--;
 		}
 	}
 	public void moveright(Types a){
-		if(a.row<=9&&pile.rightmoveable(a)){
+		if(a.row+3-a.rightindex[a.currentrotation]<=9&&pile.rightmoveable(a)){
 			a.row++;
 		}
 	}
