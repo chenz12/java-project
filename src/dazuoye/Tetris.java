@@ -1,5 +1,7 @@
 package dazuoye;
 
+import java.applet.Applet;
+import java.applet.AudioClip;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -51,7 +53,7 @@ public class Tetris extends JFrame{
 					t.speed = maxspeed;break;
 				case KeyEvent.VK_SPACE:
 					if(isrotation(currenttype, currenttype.col, currenttype.row)){
-						currenttype.currentrotation = (currenttype.currentrotation+3)%4;
+						
 					if(currenttype.istypeI()){
 						if(currenttype.row+currenttype.leftindex[currenttype.currentrotation]==0){
 							currenttype.row +=2;
@@ -161,6 +163,14 @@ public class Tetris extends JFrame{
 	}
 	
 	void startgame(){
+		try{
+			java.net.URL musicpath = Tetris.class.getResource("/music/test.mp3");
+			System.out.println(musicpath);
+			AudioClip music = Applet.newAudioClip(musicpath);
+			music.loop();
+		}catch(Exception e){
+			javax.swing.JOptionPane.showMessageDialog(null, "音频加载失败");
+		}
 		while(true){
 			try {
 				Thread.sleep(2);
@@ -171,9 +181,10 @@ public class Tetris extends JFrame{
 		while(!over){
 			
 			cycle();
-			if(pile.update()!=0)
+			int tem = pile.update();
+			if(tem!=0)
 			{
-				score += 10 << pile.update();
+				score += 5 << tem;//计分方式为每消去一行，加10分，2-20,3-40,4-80；
 			}
 			isover();
 			
@@ -271,11 +282,28 @@ public class Tetris extends JFrame{
 	}
 	
 	boolean isrotation(Types a, int x, int y){
-		Types b =a;
-		b.currentrotation = (b.currentrotation+1)%4;
-		if(y+b.leftindex[b.currentrotation]>=0&&y+3-b.rightindex[b.currentrotation]<=9){
-		return pile.place(b, x, y);}
-		return false;
+		int newrotation = (a.currentrotation+1)%4;
+		int i = a.matrix[newrotation];
+		//System.out.println(Integer.toHexString(i));
+		int[][] result = new int[4][4];
+		for(int j=0;j<4;j++){
+			for(int k=0;k<4;k++){
+				result[3-j][3-k] = (i&(0x1 << (4*j+k)))>>(4*j+k);
+			}
+		}
+		
+		for(int p=a.leftindex[newrotation];p<4-a.rightindex[newrotation];p++){
+			for(int q=a.upindex[newrotation];q<4-a.lowindex[newrotation];q++){
+				if(x+q<0||y+p<0||x+q>19||y+p>9){
+					return false;
+				}
+				if(result[q][p]==1 && pile.main[x+q][y+p]!=null)
+					return false;
+			}
+		}
+		
+		return true;
+		
 	}
 	
 }
