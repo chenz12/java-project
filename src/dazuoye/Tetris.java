@@ -164,7 +164,7 @@ public class Tetris extends JFrame{
 	
 	void startgame(){
 		try{
-			java.net.URL musicpath = Tetris.class.getResource("/music/test.mp3");
+			java.net.URL musicpath = Tetris.class.getResource("/music/test.wav");
 			System.out.println(musicpath);
 			AudioClip music = Applet.newAudioClip(musicpath);
 			music.loop();
