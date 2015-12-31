@@ -50,6 +50,8 @@ public class Tetris extends JFrame{
 					tempspeed = t.speed;
 					t.speed = maxspeed;break;
 				case KeyEvent.VK_SPACE:
+					if(isrotation(currenttype, currenttype.col, currenttype.row)){
+						currenttype.currentrotation = (currenttype.currentrotation+3)%4;
 					if(currenttype.istypeI()){
 						if(currenttype.row+currenttype.leftindex[currenttype.currentrotation]==0){
 							currenttype.row +=2;
@@ -78,6 +80,7 @@ public class Tetris extends JFrame{
 					}
 					else
 						currenttype.currentrotation = (currenttype.currentrotation+1)%4;
+					}
 					break;
 				/*case KeyEvent.VK_E:
 					if(currenttype.row+3-currenttype.rightindex[currenttype.currentrotation]==9){
@@ -265,6 +268,14 @@ public class Tetris extends JFrame{
 		if(a.row+3-a.rightindex[a.currentrotation]<=9&&pile.rightmoveable(a)){
 			a.row++;
 		}
+	}
+	
+	boolean isrotation(Types a, int x, int y){
+		Types b =a;
+		b.currentrotation = (b.currentrotation+1)%4;
+		if(y+b.leftindex[b.currentrotation]>=0&&y+3-b.rightindex[b.currentrotation]<=9){
+		return pile.place(b, x, y);}
+		return false;
 	}
 	
 }
