@@ -3,13 +3,14 @@ package dazuoye;
 public class timer {
 	public double speed;
 	public long start;
+	public long dif;
 	timer(double d){
 		speed = d;
 		start = System.nanoTime();
 	}
 	public boolean iscycled(){
 		long temp = System.nanoTime();
-		long dif = temp - start;
+		dif = temp - start;
 		if(dif >= 1.0/(speed*Math.pow(10, -9))){
 			start = System.nanoTime();
 			return true;
@@ -21,6 +22,7 @@ public class timer {
 	}
 	public void reset(){
 		speed = 1;
-		start = System.nanoTime();
+		start = System.currentTimeMillis();
+		dif = 0;
 	}
 }

@@ -107,7 +107,9 @@ public class Tetris extends JFrame{
 					break;
 				case KeyEvent.VK_B:
 					
-					if(over){over = false;}
+					if(over){
+						over = false;
+						}
 					newgame();
 					
 					break;
@@ -148,8 +150,8 @@ public class Tetris extends JFrame{
 		this.score =0;
 		main.clean();
 		t.reset();
-		over = false;
-		currenttype =Tetris.RandomType();
+		this.over = false;
+		this.currenttype =Tetris.RandomType();
 		//startgame();
 		main.repaint();
 		side.repaint();
@@ -157,6 +159,12 @@ public class Tetris extends JFrame{
 	
 	void startgame(){
 		while(true){
+			try {
+				Thread.sleep(2);
+			} catch (InterruptedException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		while(!over){
 			
 			cycle();
