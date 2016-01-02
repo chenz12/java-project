@@ -11,7 +11,7 @@ public class MainPanel extends JPanel{
 	private static final long serialVersionUID = 1L;
 
 	private Tetris te;
-	private static final Font small = new Font("Tahoma", Font.BOLD,11);
+	private static final Font f = new Font("Tahoma", Font.BOLD,23);
 	public static final int cube = 24;
 	
 	
@@ -24,10 +24,10 @@ public class MainPanel extends JPanel{
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
 		g.setColor(new Color(5,175,5));
-		g.setFont(small);
+		g.setFont(f);
 		if(te.over){
 			String msg = "GAME OVER";
-			g.drawString(msg, 60 - g.getFontMetrics().stringWidth(msg) / 2, 400);
+			g.drawString(msg, 70, 200);
 		}
 		else{
 		for(int i=0;i<11;i++){
